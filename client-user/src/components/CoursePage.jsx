@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, sliderClasses } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -20,33 +20,38 @@ import ClosedCaptionIcon from "@mui/icons-material/ClosedCaption";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import AllInclusiveIcon from "@mui/icons-material/AllInclusive";
 import Button from "@mui/material/Button";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import "./coursesStyles.css";
 
 function CoursePage() {
   const { id } = useParams();
   const [course, setCourse] = useState({});
   const [purCourses, setPurchasedCourses] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/users/courses/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(
+        `https://jeysiva-learn-academy-server.vercel.app/users/courses/${id}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         setCourse(res.data.course);
       })
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:3000/users/purchasedCourses", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(
+        "https://jeysiva-learn-academy-server.vercel.app/users/purchasedCourses",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
       })
@@ -89,7 +94,7 @@ function CoursePage() {
               onClick={() => {
                 axios
                   .post(
-                    `http://localhost:3000/users/courses/${id}`,
+                    `https://jeysiva-learn-academy-server.vercel.app/users/courses/${id}`,
                     {},
                     {
                       headers: {

@@ -18,7 +18,7 @@ function ShowCourses() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/admin/courses/", {
+      .get("https://jeysiva-learn-academy-server.vercel.app/admin/courses/", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },

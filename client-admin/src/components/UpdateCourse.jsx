@@ -7,11 +7,14 @@ function UpdateCourse() {
   const [course, setCourse] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:3000/admin/courses/${courseId}`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
+    fetch(
+      `https://jeysiva-learn-academy-server.vercel.app/admin/courses/${courseId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setCourse(data.course);

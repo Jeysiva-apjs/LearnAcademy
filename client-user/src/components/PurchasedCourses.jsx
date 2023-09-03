@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CourseCard from "./CourseCard";
 import "../index.css";
-import { atom, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import axios from "axios";
 import { Main, openState } from "./AppNavBar";
 import "./coursesStyles.css";
 import Typography from "@mui/material/Typography";
 
 function PurchasedCourses() {
-  const [open, setOpen] = useRecoilState(openState);
+  const [open] = useRecoilState(openState);
   const [purCourses, setPurchasedCourses] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users/purchasedCourses", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(
+        "https://jeysiva-learn-academy-server.vercel.app/users/purchasedCourses",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
       })

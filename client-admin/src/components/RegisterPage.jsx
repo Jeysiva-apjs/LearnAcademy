@@ -25,7 +25,7 @@ function RegisterPage() {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:3000/admin/signup",
+          "https://jeysiva-learn-academy-server.vercel.app/admin/signup",
           {
             username: admin.email,
             password: admin.password,
@@ -34,7 +34,7 @@ function RegisterPage() {
 
         setAdminRecoil({
           email: admin.email,
-          username: admin.email.split('@')[0].toUpperCase(),
+          username: admin.email.split("@")[0].toUpperCase(),
           isLoggedIn: true,
         });
         localStorage.setItem("token", response.data.token);

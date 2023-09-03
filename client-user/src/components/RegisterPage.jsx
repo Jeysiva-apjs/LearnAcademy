@@ -15,7 +15,7 @@ function RegisterPage() {
   const [user, setUser] = useState({ email: "", password: "" });
   const setUserRecoil = useSetRecoilState(userState);
   const [message, setMessage] = useState();
-  console.log({ user })
+  console.log({ user });
   const navigate = useNavigate();
 
   const handleRegister = async () => {
@@ -25,7 +25,7 @@ function RegisterPage() {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:3000/users/signup",
+          "https://jeysiva-learn-academy-server.vercel.app/users/signup",
           {
             username: user.email,
             password: user.password,
@@ -34,7 +34,7 @@ function RegisterPage() {
 
         setUserRecoil({
           email: user.email,
-          username: user.email.split('@')[0].toUpperCase(),
+          username: user.email.split("@")[0].toUpperCase(),
           isLoggedIn: true,
         });
         localStorage.setItem("token", response.data.token);

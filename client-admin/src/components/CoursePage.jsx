@@ -30,22 +30,28 @@ function CoursePage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/users/courses/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(
+        `https://jeysiva-learn-academy-server.vercel.app/users/courses/${id}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         setCourse(res.data.course);
       })
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:3000/users/purchasedCourses", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(
+        "https://jeysiva-learn-academy-server.vercel.app/users/purchasedCourses",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
       })
@@ -88,7 +94,7 @@ function CoursePage() {
               onClick={() => {
                 axios
                   .post(
-                    `http://localhost:3000/users/courses/${id}`,
+                    `https://jeysiva-learn-academy-server.vercel.app/users/courses/${id}`,
                     {},
                     {
                       headers: {

@@ -17,7 +17,7 @@ function ShowCourses() {
   const [open] = useRecoilState(openState);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users/courses/", {
+      .get("https://jeysiva-learn-academy-server.vercel.app/users/courses/", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },

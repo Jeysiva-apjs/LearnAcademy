@@ -21,11 +21,14 @@ function CourseCard(props) {
     const id = props.course._id;
     if (userInput === "DELETE") {
       axios
-        .delete(`http://localhost:3000/admin/courses/${id}`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        })
+        .delete(
+          `https://jeysiva-learn-academy-server.vercel.app/admin/courses/${id}`,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        )
         .then((res) => {
           setCourses(courses.filter((course) => course._id !== id));
           toast.success(res.data.message);

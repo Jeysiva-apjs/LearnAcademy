@@ -24,14 +24,17 @@ function LoginPage() {
       return;
     } else {
       try {
-        const response = await axios.post("http://localhost:3000/admin/login", {
-          username: admin.email,
-          password: admin.password,
-        });
+        const response = await axios.post(
+          "https://jeysiva-learn-academy-server.vercel.app/admin/login",
+          {
+            username: admin.email,
+            password: admin.password,
+          }
+        );
 
         setAdminRecoil({
           email: admin.email,
-          username: admin.email.split('@')[0].toUpperCase(),
+          username: admin.email.split("@")[0].toUpperCase(),
           isLoggedIn: true,
         });
         localStorage.setItem("token", response.data.token);

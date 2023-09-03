@@ -22,7 +22,7 @@ function CreateCourse(props) {
   }, [props.course]);
 
   function createCourse() {
-    fetch("http://localhost:3000/admin/courses", {
+    fetch("https://jeysiva-learn-academy-server.vercel.app/admin/courses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,20 +49,23 @@ function CreateCourse(props) {
       .catch((err) => console.log(err));
   }
   function updateCourse() {
-    fetch(`http://localhost:3000/admin/courses/${props.course._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        title,
-        description,
-        price,
-        imageLink,
-        published,
-      }),
-    })
+    fetch(
+      `https://jeysiva-learn-academy-server.vercel.app/admin/courses/${props.course._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          price,
+          imageLink,
+          published,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         toast.success(data.message);
