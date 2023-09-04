@@ -58,16 +58,14 @@ function CoursePage() {
       )
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
-        setIsPurchased(
-          purCourses.filter((course) => course._id === id).length === 1
-        );
+        setIsPurchased(purCourses.some((course) => course._id === id));
         setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
         setIsLoading(false);
       });
-  }, [purCourses]);
+  }, []);
 
   if (isLoading) {
     return (
@@ -113,13 +111,14 @@ function CoursePage() {
               <Button
                 variant="contained"
                 style={{
-                  backgroundColor: isPurchased ? "green" : "#bc1c44",
+                  backgroundColor: "#bc1c44",
                   padding: "10px 20px",
                   fontWeight: "700",
                   fontSize: "1rem",
                   borderRadius: "50px",
                 }}
                 onClick={() => {
+                  setIsLoading(true);
                   axios
                     .post(
                       `https://jeysiva-learn-academy-server.vercel.app/users/courses/${id}`,
@@ -134,20 +133,23 @@ function CoursePage() {
                     .then((res) => {
                       toast.success(res.data.message);
                       setPurchasedCourses([...purCourses, res.data.course]);
+                      setIsPurchased(true);
+                      setIsLoading(false);
                     })
                     .catch((err) => {
                       console.log(err);
+                      setIsLoading(false);
                     });
                 }}
               >
-                BUY @ ${course.price}
+                BUY NOW @ ${course.price}
               </Button>
             ) : (
               <div>
                 <Button
                   variant="contained"
                   style={{
-                    backgroundColor: isPurchased ? "green" : "#bc1c44",
+                    backgroundColor: "green",
                     padding: "10px 20px",
                     fontWeight: "700",
                     fontSize: "1rem",
