@@ -66,11 +66,11 @@ function CourseCard(props) {
               style={{
                 fontWeight: "700",
                 color: isMoveOver && "#bc1c44",
-                display: "-webkit-box",
-                WebkitLineClamp: 1,
-                WebkitBoxOrient: "vertical",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
+                display: "-webkit-box",
+                "-webkit-line-clamp": 2, // Set the maximum number of lines to 2
+                "-webkit-box-orient": "vertical",
               }}
             >
               {props.course.title}
@@ -83,7 +83,7 @@ function CourseCard(props) {
                 fontWeight: "50",
                 fontFamily: "inherit",
                 display: "-webkit-box",
-                WebkitLineClamp: 2,
+                WebkitLineClamp: 1,
                 WebkitBoxOrient: "vertical",
                 overflow: "hidden",
                 textOverflow: "ellipsis",

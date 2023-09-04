@@ -55,7 +55,6 @@ function CourseCard(props) {
             >
               {props.course.title}
             </Typography>
-            <br />
             <Typography
               gutterBottom
               variant="h8"
