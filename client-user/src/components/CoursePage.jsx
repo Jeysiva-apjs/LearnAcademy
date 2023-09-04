@@ -69,7 +69,7 @@ function CoursePage() {
       })
     );
     setIsLoading(false);
-  }, [purCourses]);
+  }, []);
 
   return (
     <>
@@ -126,12 +126,18 @@ function CoursePage() {
                       .then((res) => {
                         toast.success(res.data.message);
                         setPurchasedCourses([...purCourses, res.data.course]);
-                        setIsLoading(false);
+                        setIsPurchased(
+                          purCourses.forEach((course) => {
+                            if (course._id === id) {
+                              return true;
+                            }
+                          })
+                        );
                       })
                       .catch((err) => {
                         console.log(err);
-                        setIsLoading(false);
-                      });
+                      })
+                      .finally(() => setIsLoading(false));
                   }}
                 >
                   BUY @ ${course.price}
