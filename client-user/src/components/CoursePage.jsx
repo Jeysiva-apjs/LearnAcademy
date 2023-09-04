@@ -71,11 +71,19 @@ function CoursePage() {
 
   if (isLoading) {
     return (
-      <Box sx={{ width: 300 }}>
-        <Skeleton />
-        <Skeleton animation="wave" />
-        <Skeleton animation={false} />
-      </Box>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "200px",
+        }}
+      >
+        <Box sx={{ width: 300 }}>
+          <Skeleton />
+          <Skeleton animation="wave" />
+          <Skeleton animation={false} />
+        </Box>
+      </div>
     );
   }
 
@@ -112,7 +120,6 @@ function CoursePage() {
                   borderRadius: "50px",
                 }}
                 onClick={() => {
-                  setIsLoading(true);
                   axios
                     .post(
                       `https://jeysiva-learn-academy-server.vercel.app/users/courses/${id}`,
@@ -127,11 +134,9 @@ function CoursePage() {
                     .then((res) => {
                       toast.success(res.data.message);
                       setPurchasedCourses([...purCourses, res.data.course]);
-                      setIsLoading(false);
                     })
                     .catch((err) => {
                       console.log(err);
-                      setIsLoading(false);
                     });
                 }}
               >
