@@ -7,12 +7,14 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../store/atoms/user";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import "../index.css";
 import { toast } from "react-hot-toast";
 
 function RegisterPage() {
   const [user, setUser] = useState({ email: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false);
   const setUserRecoil = useSetRecoilState(userState);
   const [message, setMessage] = useState();
   console.log({ user });
@@ -24,6 +26,7 @@ function RegisterPage() {
       return;
     } else {
       try {
+        setIsLoading(true);
         const response = await axios.post(
           "https://jeysiva-learn-academy-server.vercel.app/users/signup",
           {
@@ -42,10 +45,12 @@ function RegisterPage() {
         localStorage.setItem("email", user.email);
         setMessage("");
         toast.success(response.data.message);
+        setIsLoading(false);
         navigate("/courses");
       } catch (err) {
         console.log(err);
         setMessage(err.response.data.message);
+        setIsLoading(false);
       }
     }
   };
@@ -106,14 +111,26 @@ function RegisterPage() {
             setUser((prev) => ({ ...prev, password: e.target.value }))
           }
         />
-        <Button
-          style={{ backgroundColor: "#101460" }}
-          className="button"
-          variant="contained"
-          onClick={handleRegister}
-        >
-          Register
-        </Button>
+        {isLoading ? (
+          <Button
+            style={{ backgroundColor: "#101460" }}
+            className="button"
+            variant="contained"
+            onClick={handleRegister}
+          >
+            <CircularProgress />
+          </Button>
+        ) : (
+          <Button
+            style={{ backgroundColor: "#101460" }}
+            className="button"
+            variant="contained"
+            onClick={handleRegister}
+          >
+            Register
+          </Button>
+        )}
+
         <br></br>
         <div>
           <h3 style={{ fontWeight: "500" }}>

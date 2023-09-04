@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../store/atoms/user";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import "../index.css";
 import { toast } from "react-hot-toast";
@@ -15,6 +16,7 @@ function LoginPage() {
   const [user, setUser] = useState({ email: "", password: "" });
   const setUserRecoil = useSetRecoilState(userState);
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   console.log({ user });
   const navigate = useNavigate();
 
@@ -24,6 +26,7 @@ function LoginPage() {
       return;
     } else {
       try {
+        setIsLoading(true);
         const response = await axios.post(
           "https://jeysiva-learn-academy-server.vercel.app/users/login",
           {
@@ -43,10 +46,12 @@ function LoginPage() {
 
         setMessage("");
         toast.success(response.data.message);
+        setIsLoading(false);
         navigate("/courses");
       } catch (err) {
         console.log(err);
         setMessage(err.response.data.message);
+        setIsLoading(false);
       }
     }
   };
@@ -107,14 +112,26 @@ function LoginPage() {
             setUser((prev) => ({ ...prev, password: e.target.value }))
           }
         />
-        <Button
-          style={{ backgroundColor: "#101460" }}
-          className="button"
-          variant="contained"
-          onClick={handleLogin}
-        >
-          Login
-        </Button>
+        {isLoading ? (
+          <Button
+            style={{ backgroundColor: "#101460" }}
+            className="button"
+            variant="contained"
+            onClick={handleLogin}
+          >
+            <CircularProgress />
+          </Button>
+        ) : (
+          <Button
+            style={{ backgroundColor: "#101460" }}
+            className="button"
+            variant="contained"
+            onClick={handleLogin}
+          >
+            Login
+          </Button>
+        )}
+
         <br></br>
         <div>
           <h3 style={{ fontWeight: "500" }}>
