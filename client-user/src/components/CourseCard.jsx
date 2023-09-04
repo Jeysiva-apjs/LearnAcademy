@@ -44,23 +44,6 @@ function CourseCard(props) {
             <br />
             <Typography
               gutterBottom
-              variant="h8"
-              component="div"
-              style={{
-                fontWeight: "50",
-                fontFamily: "inherit",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {props.course.description}
-            </Typography>
-            <br />
-            <Typography
-              gutterBottom
               variant="h6"
               component="div"
               style={{ fontWeight: "900" }}
