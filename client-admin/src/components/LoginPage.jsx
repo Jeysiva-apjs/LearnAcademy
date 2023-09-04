@@ -8,6 +8,7 @@ import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { adminState } from "../store/atoms/admin";
 import { toast } from "react-hot-toast";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import "../index.css";
 
@@ -15,6 +16,7 @@ function LoginPage() {
   const [admin, setAdmin] = useState({ email: "", password: "" });
   const setAdminRecoil = useSetRecoilState(adminState);
   const [message, setMessage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,6 +26,7 @@ function LoginPage() {
       return;
     } else {
       try {
+        setIsLoading(true);
         const response = await axios.post(
           "https://jeysiva-learn-academy-server.vercel.app/admin/login",
           {
@@ -43,6 +46,7 @@ function LoginPage() {
 
         setMessage("");
         toast.success(response.data.message);
+        setIsLoading(false);
         navigate("/courses");
       } catch (err) {
         console.log(err);
@@ -107,14 +111,25 @@ function LoginPage() {
             setAdmin((prev) => ({ ...prev, password: e.target.value }))
           }
         />
-        <Button
-          style={{ backgroundColor: "#101460" }}
-          className="button"
-          variant="contained"
-          onClick={handleLogin}
-        >
-          Login
-        </Button>
+        {isLoading ? (
+          <Button
+            style={{ backgroundColor: "#101460" }}
+            className="button"
+            variant="contained"
+            onClick={handleLogin}
+          >
+            <CircularProgress size={25} />
+          </Button>
+        ) : (
+          <Button
+            style={{ backgroundColor: "#101460" }}
+            className="button"
+            variant="contained"
+            onClick={handleLogin}
+          >
+            Login
+          </Button>
+        )}
         <br></br>
         <div>
           <h3 style={{ fontWeight: "500" }}>

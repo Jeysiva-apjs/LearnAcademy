@@ -8,12 +8,14 @@ import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { adminState } from "../store/atoms/admin";
 import toast from "react-hot-toast";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import "../index.css";
 
 function RegisterPage() {
   const [admin, setAdmin] = useState({ email: "", passowrd: "" });
   const setAdminRecoil = useSetRecoilState(adminState);
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState();
 
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ function RegisterPage() {
       return;
     } else {
       try {
+        setIsLoading(true);
         const response = await axios.post(
           "https://jeysiva-learn-academy-server.vercel.app/admin/signup",
           {
@@ -44,6 +47,7 @@ function RegisterPage() {
         setMessage("");
         toast.success(response.data.message);
         navigate("/courses");
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
         setMessage(err.response.data.message);
@@ -107,14 +111,25 @@ function RegisterPage() {
             setAdmin((prev) => ({ ...prev, password: e.target.value }))
           }
         />
-        <Button
-          style={{ backgroundColor: "#101460" }}
-          className="button"
-          variant="contained"
-          onClick={handleRegister}
-        >
-          Register
-        </Button>
+        {isLoading ? (
+          <Button
+            style={{ backgroundColor: "#101460" }}
+            className="button"
+            variant="contained"
+            onClick={handleRegister}
+          >
+            <CircularProgress size={25} />
+          </Button>
+        ) : (
+          <Button
+            style={{ backgroundColor: "#101460" }}
+            className="button"
+            variant="contained"
+            onClick={handleRegister}
+          >
+            Register
+          </Button>
+        )}
         <br></br>
         <div>
           <h3 style={{ fontWeight: "500" }}>
