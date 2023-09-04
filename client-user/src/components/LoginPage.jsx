@@ -120,9 +120,7 @@ function LoginPage() {
             variant="contained"
             onClick={handleLogin}
           >
-            <Box sx={{ display: "flex" }}>
-              <CircularProgress />
-            </Box>
+            <CircularProgress style={{ width: "20px", height: "20px" }} />
           </Button>
         ) : (
           <Button
