@@ -60,8 +60,6 @@ function CoursePage() {
       )
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
-        const purchased = purchasedCourses.some((item) => item._id === id);
-        setIsPurchased(purchased);
         setIsLoading(false);
         console.log(isPurchased);
       })
@@ -70,6 +68,9 @@ function CoursePage() {
         setIsLoading(false);
       });
   }, []);
+
+  const purchased = purchasedCourses.some((item) => item._id === id);
+  setIsPurchased(purchased);
 
   if (isLoading) {
     return (
@@ -140,10 +141,7 @@ function CoursePage() {
                         ...purchasedCourses,
                         res.data.purchasedCourse,
                       ]);
-                      const purchased = purchasedCourses.some(
-                        (item) => item._id === id
-                      );
-                      setIsPurchased(purchased);
+                      setIsPurchased(true);
                       setIsLoading(false);
                     })
                     .catch((err) => {
