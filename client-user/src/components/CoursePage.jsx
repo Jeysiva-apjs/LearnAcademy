@@ -67,7 +67,7 @@ function CoursePage() {
         console.log(err);
         setIsLoading(false);
       });
-  }, []);
+  }, [purCourses]);
 
   return (
     <>
@@ -117,7 +117,6 @@ function CoursePage() {
                     .then((res) => {
                       toast.success(res.data.message);
                       setPurchasedCourses([...purCourses, res.data.course]);
-                      setIsPurchased(true);
                       setIsLoading(false);
                     })
                     .catch((err) => {
