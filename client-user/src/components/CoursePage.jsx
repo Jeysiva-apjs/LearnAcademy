@@ -44,6 +44,8 @@ function CoursePage() {
       )
       .then((res) => {
         setCourse(res.data.course);
+        console.log(course);
+        console.log(id);
       })
       .catch((err) => console.log(err));
 
@@ -58,11 +60,8 @@ function CoursePage() {
       )
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
-        setIsPurchased(
-          purchasedCourses.some((item) => item._id === course._id)
-        );
+        setIsPurchased(purchasedCourses.some((item) => item._id === id));
         setIsLoading(false);
-        console.log(course);
         console.log(isPurchased);
       })
       .catch((err) => {
@@ -136,8 +135,13 @@ function CoursePage() {
                     )
                     .then((res) => {
                       toast.success(res.data.message);
-                      setPurchasedCourses([...purchasedCourses, course]);
-                      setIsPurchased(true);
+                      setPurchasedCourses([
+                        ...purchasedCourses,
+                        res.data.purchasedCourse,
+                      ]);
+                      setIsPurchased(
+                        purchasedCourses.some((item) => item._id === id)
+                      );
                       setIsLoading(false);
                     })
                     .catch((err) => {

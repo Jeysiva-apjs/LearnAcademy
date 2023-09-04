@@ -75,7 +75,10 @@ router.post("/courses/:courseId", authenticateJwt, async (req, res) => {
     if (user) {
       user.purchasedCourses.push(course);
       await user.save();
-      res.json({ message: "Course purchased successfully", course: course });
+      res.json({
+        message: "Course purchased successfully",
+        purchasedCourse: course,
+      });
     } else {
       res.status(403).json({ message: "User not found" });
     }
