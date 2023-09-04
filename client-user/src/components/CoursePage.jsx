@@ -69,6 +69,16 @@ function CoursePage() {
       });
   }, [purCourses]);
 
+  if (isLoading) {
+    return (
+      <Box sx={{ width: 300 }}>
+        <Skeleton />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </Box>
+    );
+  }
+
   return (
     <>
       <div className="single-course">
