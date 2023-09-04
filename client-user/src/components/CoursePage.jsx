@@ -66,10 +66,6 @@ function CoursePage() {
       });
   }, []);
 
-  const purchased =
-    purchasedCourses.filter((item) => item._id == id).length === 1;
-  setIsPurchased(purchased);
-
   if (isLoading) {
     return (
       <div
@@ -87,6 +83,9 @@ function CoursePage() {
       </div>
     );
   }
+
+  const ans = purchasedCourses.filter((item) => item._id == id).length === 1;
+  setIsPurchased(ans);
 
   return (
     <>
