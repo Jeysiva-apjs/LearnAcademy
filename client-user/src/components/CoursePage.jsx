@@ -62,45 +62,84 @@ function CoursePage() {
       .catch((err) => console.log(err));
 
     setIsPurchased(
-      purCourses.forEach((course) => {
-        if (course._id === id) {
-          return true;
-        }
-      })
+      purCourses.filter((course) => course._id === id).length === 1
     );
     setIsLoading(false);
   }, []);
 
   return (
     <>
-      {isLoading ? (
-        <Box sx={{ width: 300 }}>
-          <Skeleton />
-          <Skeleton animation="wave" />
-          <Skeleton animation={false} />
-        </Box>
-      ) : (
-        <div className="single-course">
-          <div className="text-container">
-            <div>
-              <img
-                src={course.imageLink}
-                alt={course.imageLink}
-                width="300px"
-                style={{ borderRadius: "20px" }}
-              />
-            </div>
+      <div className="single-course">
+        <div className="text-container">
+          {isLoading ? (
+            <Box sx={{ width: 300 }}>
+              <Skeleton />
+              <Skeleton animation="wave" />
+              <Skeleton animation={false} />
+            </Box>
+          ) : (
+            <>
+              <div>
+                <img
+                  src={course.imageLink}
+                  alt={course.imageLink}
+                  width="300px"
+                  style={{ borderRadius: "20px" }}
+                />
+              </div>
 
-            <div>
-              <h1 className="course-title">{course.title}</h1>
-            </div>
+              <div>
+                <h1 className="course-title">{course.title}</h1>
+              </div>
 
-            <div>
-              <h3 className="des">{course.description}</h3>
-            </div>
+              <div>
+                <h3 className="des">{course.description}</h3>
+              </div>
+            </>
+          )}
 
-            <div>
-              {!isPurchased ? (
+          <div>
+            {!isPurchased ? (
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: isPurchased ? "green" : "#bc1c44",
+                  padding: "10px 20px",
+                  fontWeight: "700",
+                  fontSize: "1rem",
+                  borderRadius: "50px",
+                }}
+                onClick={() => {
+                  setIsLoading(true);
+                  axios
+                    .post(
+                      `https://jeysiva-learn-academy-server.vercel.app/users/courses/${id}`,
+                      {},
+                      {
+                        headers: {
+                          Authorization:
+                            "Bearer " + localStorage.getItem("token"),
+                        },
+                      }
+                    )
+                    .then((res) => {
+                      toast.success(res.data.message);
+                      setPurchasedCourses([...purCourses, res.data.course]);
+                      setIsPurchased(
+                        purCourses.filter((course) => course._id === id)
+                          .length === 1
+                      );
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    })
+                    .finally(() => setIsLoading(false));
+                }}
+              >
+                BUY @ ${course.price}
+              </Button>
+            ) : (
+              <div>
                 <Button
                   variant="contained"
                   style={{
@@ -110,172 +149,128 @@ function CoursePage() {
                     fontSize: "1rem",
                     borderRadius: "50px",
                   }}
-                  onClick={() => {
-                    setIsLoading(true);
-                    axios
-                      .post(
-                        `https://jeysiva-learn-academy-server.vercel.app/users/courses/${id}`,
-                        {},
-                        {
-                          headers: {
-                            Authorization:
-                              "Bearer " + localStorage.getItem("token"),
-                          },
-                        }
-                      )
-                      .then((res) => {
-                        toast.success(res.data.message);
-                        setPurchasedCourses([...purCourses, res.data.course]);
-                        setIsPurchased(
-                          purCourses.forEach((course) => {
-                            if (course._id === id) {
-                              return true;
-                            }
-                          })
-                        );
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      })
-                      .finally(() => setIsLoading(false));
+                >
+                  Purchased
+                </Button>
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "#101460",
+                    padding: "10px 20px",
+                    fontWeight: "700",
+                    fontSize: "1rem",
+                    borderRadius: "50px",
+                    marginLeft: "20px",
                   }}
                 >
-                  BUY @ ${course.price}
+                  View Content
                 </Button>
-              ) : (
-                <div>
-                  <Button
-                    variant="contained"
-                    style={{
-                      backgroundColor: isPurchased ? "green" : "#bc1c44",
-                      padding: "10px 20px",
-                      fontWeight: "700",
-                      fontSize: "1rem",
-                      borderRadius: "50px",
-                    }}
-                  >
-                    Purchased
-                  </Button>
-                  <Button
-                    variant="contained"
-                    style={{
-                      backgroundColor: "#101460",
-                      padding: "10px 20px",
-                      fontWeight: "700",
-                      fontSize: "1rem",
-                      borderRadius: "50px",
-                      marginLeft: "20px",
-                    }}
-                  >
-                    View Content
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div>
-            <Card
-              sx={{ width: "350px" }}
-              style={{
-                backgroundColor: " #101460",
-                color: "white",
-                borderRadius: "10px",
-                paddingRight: "6px",
-                display: "flex",
-                padding: "8px",
-              }}
-            >
-              <CardActionArea>
-                <CardContent style={{ textAlign: "center" }}>
-                  <Typography gutterBottom variant="h4" component="div">
-                    Course Overview
-                  </Typography>
-                  <br />
-                  <Box
-                    sx={{
-                      bgcolor: "background.paper",
-                      color: "black",
-                      borderRadius: "20px",
-                      padding: "20px 5px",
-                    }}
-                  >
-                    <nav aria-label="main mailbox folders">
-                      <List style={{ padding: "10px" }}>
-                        <ListItem disablePadding>
-                          <ListItemButton>
-                            <ListItemIcon>
-                              <SignalCellularAltIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary="Beginner to Pro
-"
-                            />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton>
-                            <ListItemIcon>
-                              <OndemandVideoIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="20+ Hours of HD video" />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton>
-                            <ListItemIcon>
-                              <FormatListBulletedIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="150+ Lessons" />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton>
-                            <ListItemIcon>
-                              <DownloadIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Downloadable content" />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton>
-                            <ListItemIcon>
-                              <ClosedCaptionIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="English captions" />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton>
-                            <ListItemIcon>
-                              <MilitaryTechIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary="Certificate of completion
-"
-                            />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton>
-                            <ListItemIcon>
-                              <AllInclusiveIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary="Lifetime access
-"
-                            />
-                          </ListItemButton>
-                        </ListItem>
-                      </List>
-                    </nav>
-                  </Box>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+              </div>
+            )}
           </div>
         </div>
-      )}
+
+        <div>
+          <Card
+            sx={{ width: "350px" }}
+            style={{
+              backgroundColor: " #101460",
+              color: "white",
+              borderRadius: "10px",
+              paddingRight: "6px",
+              display: "flex",
+              padding: "8px",
+            }}
+          >
+            <CardActionArea>
+              <CardContent style={{ textAlign: "center" }}>
+                <Typography gutterBottom variant="h4" component="div">
+                  Course Overview
+                </Typography>
+                <br />
+                <Box
+                  sx={{
+                    bgcolor: "background.paper",
+                    color: "black",
+                    borderRadius: "20px",
+                    padding: "20px 5px",
+                  }}
+                >
+                  <nav aria-label="main mailbox folders">
+                    <List style={{ padding: "10px" }}>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                          <ListItemIcon>
+                            <SignalCellularAltIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary="Beginner to Pro
+"
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                          <ListItemIcon>
+                            <OndemandVideoIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="20+ Hours of HD video" />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                          <ListItemIcon>
+                            <FormatListBulletedIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="150+ Lessons" />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                          <ListItemIcon>
+                            <DownloadIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Downloadable content" />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                          <ListItemIcon>
+                            <ClosedCaptionIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="English captions" />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                          <ListItemIcon>
+                            <MilitaryTechIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary="Certificate of completion
+"
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem disablePadding>
+                        <ListItemButton>
+                          <ListItemIcon>
+                            <AllInclusiveIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary="Lifetime access
+"
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                    </List>
+                  </nav>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </div>
+      </div>
     </>
   );
 }

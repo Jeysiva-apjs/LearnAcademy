@@ -27,40 +27,40 @@ function ShowCourses() {
       })
       .then((res) => {
         setCourses(res.data.courses);
+        setIsLoading(false);
       })
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
   }, []);
 
   return (
     <>
-      {isLoading ? (
-        <>
-          <Skeleton variant="rectangular" width={210} height={118} />
-          <Skeleton variant="rectangular" width={210} height={118} />
-          <Skeleton variant="rectangular" width={210} height={118} />
-          <Skeleton variant="rectangular" width={210} height={118} />
-          <Skeleton variant="rectangular" width={210} height={118} />
-          <Skeleton variant="rectangular" width={210} height={118} />
-        </>
-      ) : (
-        <Main open={open}>
-          <Typography
-            variant="h4"
-            component="div"
-            style={{
-              flexGrow: 1,
-              padding: "10px",
-              borderRadius: "4px",
-              fontWeight: "bold",
-              color: "#101460",
-              textAlign: "center",
-              marginTop: "70px",
-              marginLeft: "210px",
-            }}
-          >
-            All Courses
-          </Typography>
+      <Main open={open}>
+        <Typography
+          variant="h4"
+          component="div"
+          style={{
+            flexGrow: 1,
+            padding: "10px",
+            borderRadius: "4px",
+            fontWeight: "bold",
+            color: "#101460",
+            textAlign: "center",
+            marginTop: "70px",
+            marginLeft: "210px",
+          }}
+        >
+          All Courses
+        </Typography>
+        {isLoading ? (
+          <div style={{ display: "flex", gap: "20px" }}>
+            <Skeleton variant="rectangular" width={210} height={118} />
+            <Skeleton variant="rectangular" width={210} height={118} />
+            <Skeleton variant="rectangular" width={210} height={118} />
+          </div>
+        ) : (
           <div className="all-courses">
             {courses.length > 0
               ? courses.map((course) => (
@@ -68,8 +68,8 @@ function ShowCourses() {
                 ))
               : "Oops! No course is currently offered. Return later!"}
           </div>
-        </Main>
-      )}
+        )}
+      </Main>
     </>
   );
 }
