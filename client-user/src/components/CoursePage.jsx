@@ -61,11 +61,10 @@ function CoursePage() {
       })
       .catch((err) => console.log(err));
 
-    setIsPurchased(
-      purCourses.filter((course) => course._id === id).length === 1
-    );
     setIsLoading(false);
   }, []);
+
+  setIsPurchased(purCourses.filter((course) => course._id === id).length === 1);
 
   return (
     <>
@@ -125,10 +124,7 @@ function CoursePage() {
                     .then((res) => {
                       toast.success(res.data.message);
                       setPurchasedCourses([...purCourses, res.data.course]);
-                      setIsPurchased(
-                        purCourses.filter((course) => course._id === id)
-                          .length === 1
-                      );
+                      setIsPurchased(true);
                     })
                     .catch((err) => {
                       console.log(err);

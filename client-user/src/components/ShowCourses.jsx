@@ -54,21 +54,24 @@ function ShowCourses() {
         >
           All Courses
         </Typography>
-        {isLoading ? (
-          <div style={{ display: "flex", gap: "20px" }}>
-            <Skeleton variant="rectangular" width={210} height={118} />
-            <Skeleton variant="rectangular" width={210} height={118} />
-            <Skeleton variant="rectangular" width={210} height={118} />
-          </div>
-        ) : (
-          <div className="all-courses">
-            {courses.length > 0
-              ? courses.map((course) => (
-                  <CourseCard key={course._id} course={course} />
-                ))
-              : "Oops! No course is currently offered. Return later!"}
-          </div>
-        )}
+
+        <div className="all-courses">
+          {isLoading ? (
+            <div style={{ display: "flex", gap: "20px" }}>
+              <Skeleton variant="rectangular" width={345} height={400} />
+              <Skeleton variant="rectangular" width={345} height={400} />
+              <Skeleton variant="rectangular" width={345} height={400} />
+            </div>
+          ) : (
+            <>
+              {courses.length > 0
+                ? courses.map((course) => (
+                    <CourseCard key={course._id} course={course} />
+                  ))
+                : "Oops! No course is currently offered. Return later!"}
+            </>
+          )}
+        </div>
       </Main>
     </>
   );
