@@ -60,17 +60,16 @@ function CoursePage() {
       )
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
+        console.log(purchasedCourses);
+        const purchased = purchasedCourses.some((item) => item._id === id);
+        setIsPurchased(purchased);
         setIsLoading(false);
-        console.log(isPurchased);
       })
       .catch((err) => {
         console.log(err);
         setIsLoading(false);
       });
   }, []);
-
-  const purchased = purchasedCourses.some((item) => item._id === id);
-  setIsPurchased(purchased);
 
   if (isLoading) {
     return (
