@@ -58,44 +58,35 @@ function CoursePage() {
       )
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
+        setIsPurchased(
+          purCourses.filter((course) => course._id === id).length === 1
+        );
       })
       .catch((err) => console.log(err));
 
     setIsLoading(false);
-  }, []);
-
-  setIsPurchased(purCourses.filter((course) => course._id === id).length === 1);
+  }, [purCourses]);
 
   return (
     <>
       <div className="single-course">
         <div className="text-container">
-          {isLoading ? (
-            <Box sx={{ width: 300 }}>
-              <Skeleton />
-              <Skeleton animation="wave" />
-              <Skeleton animation={false} />
-            </Box>
-          ) : (
-            <>
-              <div>
-                <img
-                  src={course.imageLink}
-                  alt={course.imageLink}
-                  width="300px"
-                  style={{ borderRadius: "20px" }}
-                />
-              </div>
+          <div>
+            <img
+              src={course.imageLink}
+              alt={course.imageLink}
+              width="300px"
+              style={{ borderRadius: "20px" }}
+            />
+          </div>
 
-              <div>
-                <h1 className="course-title">{course.title}</h1>
-              </div>
+          <div>
+            <h1 className="course-title">{course.title}</h1>
+          </div>
 
-              <div>
-                <h3 className="des">{course.description}</h3>
-              </div>
-            </>
-          )}
+          <div>
+            <h3 className="des">{course.description}</h3>
+          </div>
 
           <div>
             {!isPurchased ? (
