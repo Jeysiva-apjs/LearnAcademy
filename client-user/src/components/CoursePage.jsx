@@ -27,7 +27,7 @@ import Skeleton from "@mui/material/Skeleton";
 function CoursePage() {
   const { id } = useParams();
   const [course, setCourse] = useState({});
-  const [purCourses, setPurchasedCourses] = useState([]);
+  const [purchasedCourses, setPurchasedCourses] = useState([]);
   const [isPurchased, setIsPurchased] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -58,8 +58,12 @@ function CoursePage() {
       )
       .then((res) => {
         setPurchasedCourses(res.data.purchasedCourses);
-        setIsPurchased(purCourses.some((course) => course._id === id));
+        setIsPurchased(
+          purchasedCourses.some((item) => item._id === course._id)
+        );
         setIsLoading(false);
+        console.log(course);
+        console.log(isPurchased);
       })
       .catch((err) => {
         console.log(err);
@@ -132,7 +136,7 @@ function CoursePage() {
                     )
                     .then((res) => {
                       toast.success(res.data.message);
-                      setPurchasedCourses([...purCourses, res.data.course]);
+                      setPurchasedCourses([...purchasedCourses, course]);
                       setIsPurchased(true);
                       setIsLoading(false);
                     })
