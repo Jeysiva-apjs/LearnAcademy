@@ -118,7 +118,7 @@ function RegisterPage() {
             variant="contained"
             onClick={handleRegister}
           >
-            <CircularProgress />
+            <CircularProgress size={20} />
           </Button>
         ) : (
           <Button
