@@ -8,6 +8,7 @@ import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../store/atoms/user";
 import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 import "../index.css";
 import { toast } from "react-hot-toast";
@@ -119,7 +120,9 @@ function LoginPage() {
             variant="contained"
             onClick={handleLogin}
           >
-            <CircularProgress />
+            <Box sx={{ display: "flex" }}>
+              <CircularProgress />
+            </Box>
           </Button>
         ) : (
           <Button
