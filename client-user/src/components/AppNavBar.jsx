@@ -172,9 +172,9 @@ export default function AppNavBar() {
               {/* add user name and email */}
               <ListItem key="name" disablePadding>
                 <ListItemButton>
-                  {/* <ListItemIcon>
+                  <ListItemIcon>
                     <AccountBoxIcon />
-                  </ListItemIcon> */}
+                  </ListItemIcon>
                   <ListItemText
                     primary={user?.username}
                     // secondary={user?.email}
