@@ -22,6 +22,7 @@ import Button from "@mui/material/Button";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import "./style.css";
 
 const drawerWidth = 240;
@@ -167,9 +168,8 @@ export default function AppNavBar() {
         open={open}
       >
         <DrawerHeader>
-          {user.isLoggedIn && (
+          {/* {user.isLoggedIn && (
             <List>
-              {/* add user name and email */}
               <ListItem key="name" disablePadding>
                 <ListItemButton>
                   <div style={{ display: "flex", justifyContent: "start" }}>
@@ -178,13 +178,13 @@ export default function AppNavBar() {
                     </ListItemIcon>
                     <ListItemText
                       primary={user?.username}
-                      // secondary={user?.email}
+                      secondary={user?.email}
                     />
                   </div>
                 </ListItemButton>
               </ListItem>
             </List>
-          )}
+          )} */}
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -216,7 +216,7 @@ export default function AppNavBar() {
               }}
             >
               <ListItemIcon>
-                <ShoppingBasketIcon />
+                <ShoppingCartIcon />
               </ListItemIcon>
               <ListItemText primary={"Course Cart"} />
             </ListItemButton>
