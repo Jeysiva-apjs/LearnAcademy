@@ -172,13 +172,17 @@ export default function AppNavBar() {
               {/* add user name and email */}
               <ListItem key="name" disablePadding>
                 <ListItemButton>
-                  <ListItemIcon>
-                    <AccountBoxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={user?.username}
-                    // secondary={user?.email}
-                  />
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <ListItemIcon>
+                      <AccountBoxIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={user?.username}
+                      // secondary={user?.email}
+                    />
+                  </div>
                 </ListItemButton>
               </ListItem>
             </List>
