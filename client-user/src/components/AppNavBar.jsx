@@ -172,12 +172,12 @@ export default function AppNavBar() {
               {/* add user name and email */}
               <ListItem key="name" disablePadding>
                 <ListItemButton>
-                  <ListItemIcon>
+                  {/* <ListItemIcon>
                     <AccountBoxIcon />
-                  </ListItemIcon>
+                  </ListItemIcon> */}
                   <ListItemText
                     primary={user?.username}
-                    secondary={user?.email}
+                    // secondary={user?.email}
                   />
                 </ListItemButton>
               </ListItem>
@@ -206,8 +206,6 @@ export default function AppNavBar() {
               <ListItemText primary={"All Courses"} />
             </ListItemButton>
           </ListItem>
-        </List>
-        <List>
           <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
