@@ -212,6 +212,19 @@ export default function AppNavBar() {
             <ListItemButton
               onClick={() => {
                 handleDrawerClose();
+                navigate("/courses/cart");
+              }}
+            >
+              <ListItemIcon>
+                <ShoppingBasketIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Course Cart"} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              onClick={() => {
+                handleDrawerClose();
                 navigate("/courses/purchased");
               }}
             >

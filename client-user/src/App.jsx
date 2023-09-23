@@ -7,7 +7,8 @@ import ShowCourses from "./components/ShowCourses";
 import CoursePage from "./components/CoursePage";
 import PurchasedCourses from "./components/PurchasedCourses";
 import AppNavBar from "./components/AppNavBar";
-import { Toaster } from 'react-hot-toast';
+import Cart from "./components/Cart";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/courses" element={<ShowCourses />} />
         <Route path="/courses/:id" element={<CoursePage />} />
+        <Route path="/courses/cart" element={<Cart />} />
         <Route path="/courses/purchased" element={<PurchasedCourses />} />
       </Routes>
       <Toaster />
