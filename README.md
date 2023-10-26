@@ -7,8 +7,8 @@
 A feature-rich full-stack course selling website using the MERN stack (Node.js, Express.js, MongoDB, and React).
 
 Checkout the live app
-Admin Dashboard:- https://jeysiva-learn-academy-admin.vercel.app/
-User Dashboard :- https://jeysiva-learn-academy-user.vercel.app/
+- Admin Dashboard:- https://jeysiva-learn-academy-admin.vercel.app/
+- User Dashboard :- https://jeysiva-learn-academy-user.vercel.app/
 
 # Table of Contents
 
