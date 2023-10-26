@@ -51,6 +51,7 @@ function RegisterPage() {
       } catch (err) {
         console.log(err);
         setMessage(err.response.data.message);
+        setIsLoading(false);
       }
     }
   };
