@@ -1,15 +1,15 @@
 ![3](https://github.com/Jeysiva-apjs/LearnAcademy/assets/126048586/ed1f579e-2155-4e38-9dd6-b61eeb534b40)
 
 <div align="center">
-  <h2>A course selling app</h2>
+  <h2>A Course Selling App</h2>
 </div>
 
-A feature-rich full-stack course selling website using the MERN stack (Node.js, Express.js, MongoDB, and React).
+A feature-rich full-stack course-selling website using the MERN stack (Node.js, Express.js, MongoDB, and React).
 
 Checkout the live app
 - Admin Dashboard:- https://jeysiva-learn-academy-admin.vercel.app/
-- User Dashboard :- https://jeysiva-learn-academy-user.vercel.app/
-- Demo Video :- https://youtu.be/7uU38dCcxbs
+- User Dashboard:- https://jeysiva-learn-academy-user.vercel.app/
+- Demo Video:- https://youtu.be/7uU38dCcxbs
 
 # Table of Contents
 
