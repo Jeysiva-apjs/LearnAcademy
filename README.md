@@ -7,7 +7,8 @@
 
 A full-stack course-selling app with admin and user dashboards. Admins can manage courses, while users can explore and purchase. It offers login and registration for both roles.
 
-Checkout the demo and live app
+
+# Demo and live app
 - Demo Video:- https://youtu.be/7uU38dCcxbs
 - Admin Dashboard:- https://jeysiva-learn-academy-admin.vercel.app/
 - User Dashboard:- https://jeysiva-learn-academy-user.vercel.app/
