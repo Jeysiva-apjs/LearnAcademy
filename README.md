@@ -1,15 +1,16 @@
-![3](https://github.com/Jeysiva-apjs/LearnAcademy/assets/126048586/ed1f579e-2155-4e38-9dd6-b61eeb534b40)
+<img width="1027" alt="image" src="https://github.com/user-attachments/assets/d3f84454-768c-41fb-a9f1-c113e3a9e555" />
+
 
 <div align="center">
   <h2>A Course Selling App</h2>
 </div>
 
-A feature-rich full-stack course-selling website using the MERN stack (Node.js, Express.js, MongoDB, and React).
+A full-stack course-selling app with admin and user dashboards. Admins can manage courses, while users can explore and purchase. It offers login and registration for both roles.
 
-Checkout the live app
+Checkout the demo and live app
+- Demo Video:- https://youtu.be/7uU38dCcxbs
 - Admin Dashboard:- https://jeysiva-learn-academy-admin.vercel.app/
 - User Dashboard:- https://jeysiva-learn-academy-user.vercel.app/
-- Demo Video:- https://youtu.be/7uU38dCcxbs
 
 # Table of Contents
 
@@ -26,9 +27,9 @@ Checkout the live app
 1. The admin side of the course selling app.
 2. Admins can effortlessly log in or register a new account.
 3. All admins have the power to:
-   ✅ CREATE courses
-   ✏️ UPDATE courses
-   ❌ DELETE courses
+   - CREATE courses
+   - UPDATE courses
+   - DELETE courses
 
 ## User Dashboard
 
@@ -37,11 +38,6 @@ Checkout the live app
 3. Users get access to a wide range of courses to explore and learn from.
 4. Users can seamlessly purchase their preferred courses! 💡
 
-Note: The payment system and uploading of course content are still not in place.
-
-## Demo video
-
-https://youtu.be/7uU38dCcxbs
 
 ## Built With
 
